@@ -1,6 +1,6 @@
 {
   "name": "coffea-telegram",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "telegram plugin for coffea",
   "author": "Caffeinery Developers <daniel.bugl@touchlay.com>",
   "repository": {
@@ -31,7 +31,8 @@
     "url": "https://github.com/caffeinery/coffea-telegram/issues"
   },
   "dependencies": {
-    "debug": "^2.2.0"
+    "debug": "^2.2.0",
+    "node-telegram-bot-api": "^0.11.1"
   },
   "engine": "node >= 0.10.0",
   "license": "BSD-2-Clause"
