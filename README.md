@@ -21,3 +21,8 @@ client.loadPlugin('coffea-telegram');
 ```
 
 `coffea-telegram` aims to be compatible with coffea. Of course, features that telegram doesn't have (like joining channels) aren't available for telegram protocols and will result in an error if called on a telegram stream. (If `join` is called in the `motd` event it shouldn't make a difference though, as telegram doesn't emit that event)
+
+
+## Telegram API
+
+Until https://github.com/caffeinery/coffea-telegram/issues/1 is done, use `client.streams[event.network]` to use the telegram api. (the "stream" is a `TelegramBot` object, so you can use everything that [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) lets you do)

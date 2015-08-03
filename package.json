@@ -1,6 +1,6 @@
 {
   "name": "coffea-telegram",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "telegram plugin for coffea",
   "author": "Caffeinery Developers <daniel.bugl@touchlay.com>",
   "repository": {
