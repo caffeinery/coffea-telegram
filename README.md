@@ -8,6 +8,8 @@ _telegram plugin for [coffea](https://github.com/caffeinery/coffea/)_
  * Make sure to use the latest *unstable* version of coffea by specifying: `"coffea": "caffeinery/coffea#plugin-manager"` in your dependencies
  * Install `coffea-telegram`: `npm install --save coffea-telegram`
 
+__NOTE: The latest unstable coffea version uses ES6 proxies, make sure to run your programs with the `--harmony_proxies` flag and ideally on the latest io.js version (that's what I'm testing with): `node --harmony_proxies script.js`__
+
 
 ## Usage
 
