@@ -1,0 +1,38 @@
+{
+  "name": "coffea-telegram",
+  "version": "0.0.1",
+  "description": "telegram plugin for coffea",
+  "author": "Caffeinery Developers <daniel.bugl@touchlay.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caffeinery/coffea-telegram.git"
+  },
+  "keywords": [
+    "coffea",
+    "coffea irc",
+    "node-telegram",
+    "nodejs telegram",
+    "telegram",
+    "telegram client",
+    "telegram library",
+    "telegram client library",
+    "telegram3",
+    "telegramv3",
+    "library",
+    "chat",
+    "multi-network",
+    "event-based",
+    "events",
+    "coffeehouse",
+    "extensible",
+    "plugins"
+  ],
+  "bugs": {
+    "url": "https://github.com/caffeinery/coffea-telegram/issues"
+  },
+  "dependencies": {
+    "debug": "^2.2.0"
+  },
+  "engine": "node >= 0.10.0",
+  "license": "BSD-2-Clause"
+}
