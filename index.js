@@ -56,6 +56,10 @@ module.exports = function (cb) {
         coffea.define('telegram', 'write', function writeTelegram() { });
         // FIXME: this is just a workaround because the irc protocol still calls write to all networks sometimes and we don't handle "send to all networks" in the new system yet
 
+        coffea.define('telegram', 'format.get', function (name) {
+            return ''; // telegram doesn't support formatting
+        });
+
         coffea.define('telegram', 'send', function telegramSend(target, msg, network, fn) {
             if (typeof target !== "string") target = target.id;
             T(network).sendMessage(target, msg);
