@@ -15,10 +15,10 @@ __NOTE: The latest unstable coffea version uses ES6 proxies, make sure to run yo
 
 Specify the telegram protocol in your network config:
 
- * Short `string` config: "telegram://TOKEN"
+ * Short `string` config: `"telegram://TOKEN"`
  * Long `object` config: `{"protocol": "telegram", "token": "TOKEN"}`
 
-_Note: coffea will automatically load `coffea-telegram` when it's needed! Thus, using telegram (or other protocols) like that should work on **any** coffea project, **without any tweaks** (other than installing `coffea-telegram` and specifying the config)._
+coffea will automatically load `coffea-telegram` when it's needed! Thus, using telegram (or other protocols) this way should work on **any** coffea project, **without any tweaks** (other than installing `coffea-telegram` and specifying the config).
 
 `coffea-telegram` aims to be compatible with coffea. Of course, features that telegram doesn't have (like joining channels) aren't available for telegram protocols and will result in an error if called on a telegram stream. (If `join` is called in the `motd` event it shouldn't make a difference though, as telegram doesn't emit that event)
 
