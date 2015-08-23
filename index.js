@@ -52,7 +52,7 @@ module.exports = function (cb) {
 
                     var doEmit = false;
 
-                    var message = text.split(' ');
+                    var message = coffea.splitString(text);
                     debugC("message: %s", JSON.stringify(message));
 
                     var cmdStr = message.shift();
@@ -96,7 +96,7 @@ module.exports = function (cb) {
                 return text;
             }
 
-            bot.on('message', function (msg) {
+            bot.on('text', function (msg) {
                 debug('recv %s', JSON.stringify(msg));
                 msg.from.nick = msg.from.username ? msg.from.username : msg.from.id; // alias
                 parseTelegramCommand(bot.me, msg);
