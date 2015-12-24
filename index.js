@@ -108,6 +108,35 @@ module.exports = function (cb) {
                     // "tags": msg.tags ? msg.tags : []
                 });
             });
+
+            function forward (type) {
+              return function eventForwarder (msg) {
+                debug('forwarding %s event', type);
+                msg.from.nick = msg.from.username ? msg.from.username : msg.from.id; // alias
+                utils.emit(coffea, stream_id, type, {
+                    "channel": msg.chat.id !== msg.from.id ? msg.chat : undefined, // TODO: use Channel object
+                    "user": msg.from, // TODO: use User object
+                    "data": msg,
+                    // "isAction": isAction,
+                    // "tags": msg.tags ? msg.tags : []
+                });
+              };
+            }
+
+            bot.on('audio', forward('audio'));
+            bot.on('document', forward('document'));
+            bot.on('photo', forward('photo'));
+            bot.on('sticker', forward('sticker'));
+            bot.on('video', forward('video'));
+            bot.on('voice', forward('voice'));
+            bot.on('contact', forward('contact'));
+            bot.on('location', forward('location'));
+            bot.on('new_chat_participant', forward('new_chat_participant'));
+            bot.on('left_chat_participant', forward('left_chat_participant'));
+            bot.on('new_chat_title', forward('new_chat_title'));
+            bot.on('new_chat_photo', forward('new_chat_photo'));
+            bot.on('delete_chat_photo', forward('delete_chat_photo'));
+            bot.on('group_chat_created', forward('group_chat_created'));
         });
 
         coffea.define('telegram', 'write', function writeTelegram() { });
