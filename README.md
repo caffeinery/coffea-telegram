@@ -23,6 +23,19 @@ coffea will automatically load `coffea-telegram` when it's needed! Thus, using t
 `coffea-telegram` aims to be compatible with coffea. Of course, features that telegram doesn't have (like joining channels) aren't available for telegram protocols and will result in an error if called on a telegram stream. (If `join` is called in the `motd` event it shouldn't make a difference though, as telegram doesn't emit that event)
 
 
+## Special Events
+
+Telegram has some special events that IRC doesn't have, you can listen to them just like listening to messages and other events:
+
+```
+client.on('EVENTNAME', function (event) {
+```
+
+The following events are available: `text`, `audio`, `document`, `photo`, `sticker`, `video`, `voice`, `contact`, `location`, `new_chat_participant`, `left_chat_participant`, `new_chat_title`, `new_chat_photo`, `delete_chat_photo`, `group_chat_created`
+
+For an example, check out [statsbot](https://github.com/omnidan/statsbot), which uses coffea-telegram.
+
+
 ## Telegram API
 
 Until https://github.com/caffeinery/coffea-telegram/issues/1 is done, use `client.streams[event.network]` to use the telegram api. (the "stream" is a `TelegramBot` object, so you can use everything that [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) lets you do)
