@@ -1,26 +1,29 @@
 # coffea-telegram
 
-_telegram plugin for [coffea](https://github.com/caffeinery/coffea/)_
+_telegram plugin for [coffea 1.0-beta](https://github.com/caffeinery/coffea/tree/1.0-beta)_
 
 
 ## Setup
 
- * Make sure to use the latest *unstable* version of coffea by specifying: `"coffea": "caffeinery/coffea#plugin-manager"` in your dependencies
+ * Make sure to use the latest *beta* version of coffea by running: `npm install --save coffea@beta`
  * Install `coffea-telegram`: `npm install coffea-telegram`
-
-__NOTE: The latest unstable coffea version uses ES6 proxies, make sure to run your programs with the `--harmony_proxies` flag and ideally on the latest io.js version (that's what I'm testing with): `node --harmony_proxies script.js`__
 
 
 ## Usage
 
 Specify the telegram protocol in your network config:
 
- * Short `string` config: `"telegram://TOKEN"`
- * Long `object` config: `{"protocol": "telegram", "token": "TOKEN"}`
+```js
+{
+  "protocol": "telegram",
+  "token": "TOKEN"
+}
+```
 
 coffea will automatically load `coffea-telegram` when it's needed! Thus, using telegram (or other protocols) this way should work on **any** coffea project, **without any tweaks** (other than installing `coffea-telegram` and specifying the config).
 
-`coffea-telegram` aims to be compatible with coffea. Of course, features that telegram doesn't have (like joining channels) aren't available for telegram protocols and will result in an error if called on a telegram stream. (If `join` is called in the `motd` event it shouldn't make a difference though, as telegram doesn't emit that event)
+`coffea-telegram` aims to be compatible with coffea. Of course, features that telegram doesn't have (like joining channels) aren't available for telegram protocols, they will just
+be ignored.
 
 
 ## Special Events
@@ -28,14 +31,38 @@ coffea will automatically load `coffea-telegram` when it's needed! Thus, using t
 Telegram has some special events that IRC doesn't have, you can listen to them just like listening to messages and other events:
 
 ```
-client.on('EVENTNAME', function (event) {
+networks.on('EVENTNAME', (event, reply) => {
+  console.log(event)
+})
 ```
 
 The following events are available: `text`, `audio`, `document`, `photo`, `sticker`, `video`, `voice`, `contact`, `location`, `new_chat_participant`, `left_chat_participant`, `new_chat_title`, `new_chat_photo`, `delete_chat_photo`, `group_chat_created`
 
-For an example, check out [statsbot](https://github.com/omnidan/statsbot), which uses coffea-telegram.
+For some example bots, check out the [coffea-bots organisation](https://github.com/coffea-bots)
+for existing bots, or the [coffea-starter repo](https://github.com/coffea-bots/coffea-starter),
+if you want to create your own bot.
 
 
 ## Telegram API
 
-Until https://github.com/caffeinery/coffea-telegram/issues/1 is done, use `client.streams[event.network]` to use the telegram api. (the "stream" is a `TelegramBot` object, so you can use everything that [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) lets you do)
+You can use:
+
+```js
+networks.send({
+  type: 'FUNCTION_NAME',
+  arguments
+})
+```
+
+to access the [telegram api](https://github.com/yagop/node-telegram-bot-api#api-reference).
+All arguments have the same names, except the ids have all been simplified to `id` instead of `chatId`, `inlineQueryId`, etc.
+
+Here is an example:
+
+```js
+networks.send({
+  type: 'getMe'
+}).then(
+  me => console.log(me)
+)
+```
