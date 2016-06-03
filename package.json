@@ -1,6 +1,6 @@
 {
   "name": "coffea-telegram",
-  "version": "1.0.0-beta2",
+  "version": "1.0.0-beta3",
   "main": "lib/index.js",
   "devDependencies": {
     "babel-core": "^6.5.1",
