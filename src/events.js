@@ -4,7 +4,7 @@ const { log } = dude('coffea-telegram:events')
 import { message, command, error } from 'coffea'
 
 const getSender = (evt) =>
-  evt.chat.id !== evt.from.id ? evt.chat.id : evt.from.id
+  evt.chat && evt.chat.id !== evt.from.id ? evt.chat.id : evt.from.id
 
 const makeForward = (dispatch) =>
   (evtName) => (evt) => dispatch({
