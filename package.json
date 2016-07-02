@@ -1,6 +1,6 @@
 {
   "name": "coffea-telegram",
-  "version": "1.0.0-beta4",
+  "version": "1.0.0-beta5",
   "main": "lib/index.js",
   "devDependencies": {
     "babel-cli": "^6.9.0",
@@ -14,7 +14,7 @@
     "rimraf": "^2.5.2"
   },
   "dependencies": {
-    "coffea": "1.0.0-beta14",
+    "coffea": "1.0.0-beta15",
     "debug-dude": "^1.0.3",
     "node-telegram-bot-api": "^0.21.1"
   },
