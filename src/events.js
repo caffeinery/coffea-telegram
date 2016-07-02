@@ -3,15 +3,22 @@ const { log } = dude('coffea-telegram:events')
 
 import { message, command, error } from 'coffea'
 
-const getSender = (evt) =>
-  evt.chat && evt.chat.id !== evt.from.id ? evt.chat.id : evt.from.id
+const isPrivate = (evt) =>
+  evt.chat && evt.chat.id === evt.from.id
+
+const getChat = (evt) =>
+  isPrivate(evt) ? evt.from.id : evt.chat.id
+
+const getUser = (evt) =>
+  evt.from && evt.from.id
 
 const makeForward = (dispatch) =>
   (evtName) => (evt) => dispatch({
-    ...evt,
     type: evtName,
-    sender: getSender(evt),
-    text: evt.text
+    chat: getChat(evt),
+    user: getUser(evt), // user
+    text: evt.text,
+    raw: evt
   })
 
 const validCommand = (me, cmd) => {
@@ -34,12 +41,13 @@ export default function events (bot, dispatch) {
 
   const forward = makeForward(dispatch)
 
-  bot.on('message', (evt) => dispatch(message(
-    getSender(evt), // sender
-    evt.text // message
-    // ,evt // rest of the options
-    // FIXME: type is getting overwritten right now
-  )))
+  bot.on('message', (evt) => dispatch(message({
+    chat: getChat(evt), // chat
+    user: getUser(evt), // user
+    text: evt.text, // message
+    private: isPrivate(evt), // private message or not?
+    raw: evt // rest of the options
+  })))
 
   bot.on('message', (evt) => {
     log('message event received: %o', evt)
@@ -50,12 +58,13 @@ export default function events (bot, dispatch) {
       // args is now [ 'username' ]
       if (validCommand(me, cmd)) {
         log(' `-> valid command "%s" with args: %o', cmd[0], args)
-        return dispatch(command(
-          getSender(evt), // sender
-          cmd[0], // cmd
-          args // args
-          // ,evt // rest of the options
-        ))
+        return dispatch(command({
+          chat: getChat(evt), // chat
+          user: getUser(evt), // user
+          cmd: cmd[0], // cmd
+          args, // args
+          raw: evt // rest of the options
+        }))
       } else log(' !-> wrong recipient "%s", expected "%s"', cmd[1], me.username)
     }
   })
@@ -77,5 +86,5 @@ export default function events (bot, dispatch) {
   bot.on('inline_query', forward('inline_query'))
   bot.on('chosen_inline_result', forward('chosen_inline_result'))
 
-  bot.on('error', (err) => dispatch(error(err)))
+  bot.on('error', (err) => dispatch(error({ err })))
 }
