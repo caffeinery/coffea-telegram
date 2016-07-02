@@ -3,7 +3,7 @@ export default function makeCommands (bot) {
     // TODO: standardize these commands and document in coffea
     //       e.g. message(...), me(), photo(...), ...
     'message': (event) =>
-      bot.sendMessage(event.channel, event.text, event.options),
+      bot.sendMessage(event.chat, event.text, event.options),
     'getMe': (event) =>
       bot.getMe(),
     'setWebHook': (event) =>
