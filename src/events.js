@@ -41,7 +41,7 @@ export default function events (bot, dispatch) {
 
   const forward = makeForward(dispatch)
 
-  bot.on('message', (evt) => dispatch(message({
+  bot.on('text', (evt) => dispatch(message({
     chat: getChat(evt), // chat
     user: getUser(evt), // user
     text: evt.text, // message
@@ -49,7 +49,7 @@ export default function events (bot, dispatch) {
     raw: evt // rest of the options
   })))
 
-  bot.on('message', (evt) => {
+  bot.on('text', (evt) => {
     log('message event received: %o', evt)
     if (evt.text.charAt(0) === '/') { // example: /np@nowplayingbot username
       log(' |-> command detected')
