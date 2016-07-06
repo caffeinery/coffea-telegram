@@ -18,6 +18,7 @@ const makeForward = (dispatch) =>
     chat: getChat(evt),
     user: getUser(evt), // user
     text: evt.text,
+    data: evt[evtName],
     raw: evt
   })
 

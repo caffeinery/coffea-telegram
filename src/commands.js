@@ -1,19 +1,45 @@
+const extractFileId = (data) => {
+  if (Array.isArray(data)) { // array of photos, pick the largest (last) one
+    return extractFileId(data[data.length - 1])
+  } else {
+    return data && data.file_id ? data.file_id : data
+  }
+}
+
 export default function makeCommands (bot) {
   return {
     // TODO: standardize these commands and document in coffea
     //       e.g. message(...), me(), photo(...), ...
+    // TODO: add helpers for these types
+    // types
     'message': (event) =>
       bot.sendMessage(event.chat, event.text, event.options),
+    'voice': (event) =>
+      bot.sendVoice(event.chat, extractFileId(event.data), event.options),
+    'audio': (event) =>
+      bot.sendAudio(event.chat, extractFileId(event.data), event.options),
+    'sticker': (event) =>
+      bot.sendSticker(event.chat, extractFileId(event.data), event.options),
+    'photo': (event) =>
+      bot.sendPhoto(event.chat, extractFileId(event.data), event.options),
+    'video': (event) =>
+      bot.sendVideo(event.chat, extractFileId(event.data), event.options),
+    'document': (event) =>
+      bot.sendDocument(event.chat, extractFileId(event.data), event.options),
+
+    // commands
     'getMe': (event) =>
       bot.getMe(),
     'setWebHook': (event) =>
       bot.setWebHook(event.url, event.cert),
+    // TODO: change event.id to event.chat
     'getUpdates': (event) =>
       bot.getUpdates(event.id, event.results, event.options),
     'answerInlineQuery': (event) =>
       bot.answerInlineQuery(event.id, event.results, event.options),
     'forwardMessage': (event) =>
       bot.forwardMessage(event.id, event.fromChatId, event.messageId),
+    // TODO: remove send* commands and encourage using message types (see above) instead
     'sendPhoto': (event) =>
       bot.sendPhoto(event.id, event.photo, event.options),
     'sendAudio': (event) =>
