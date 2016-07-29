@@ -1,7 +1,7 @@
 import dude from 'debug-dude'
 const { log } = dude('coffea-telegram:events')
 
-import { message, command, error } from 'coffea'
+import { connection, message, command, error } from 'coffea'
 
 const isPrivate = (evt) =>
   evt.chat && evt.chat.id === evt.from.id
@@ -37,6 +37,7 @@ export default function events (bot, dispatch) {
   bot.getMe().then(
     (user) => {
       me = user
+      dispatch(connection({ me }))
     }
   )
 
