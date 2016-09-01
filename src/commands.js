@@ -63,6 +63,12 @@ export default function makeCommands (bot) {
     'getFileLink': (event) =>
       bot.getFileLink(event.id),
     'downloadFile': (event) =>
-      bot.downloadFile(event.id, event.downloadDir)
+      bot.downloadFile(event.id, event.downloadDir),
+    'editMessageText': (event) =>
+      bot.downloadFile(event.text, event.options),
+    'editMessageCaption': (event) =>
+      bot.downloadFile(event.caption, event.options),
+    'editMessageReplyMarkup': (event) =>
+      bot.downloadFile(event.reply_markup, event.options)
   }
 }
