@@ -32,13 +32,12 @@ export default function makeCommands (bot) {
       bot.getMe(),
     'setWebHook': (event) =>
       bot.setWebHook(event.url, event.cert),
-    // TODO: change event.id to event.chat
     'getUpdates': (event) =>
-      bot.getUpdates(event.id, event.results, event.options),
+      bot.getUpdates(event.chat, event.results, event.options),
     'answerInlineQuery': (event) =>
-      bot.answerInlineQuery(event.id, event.results, event.options),
+      bot.answerInlineQuery(event.chat, event.results, event.options),
     'forwardMessage': (event) =>
-      bot.forwardMessage(event.id, event.fromChatId, event.messageId),
+      bot.forwardMessage(event.chat, event.fromChatId, event.messageId),
     // TODO: remove send* commands and encourage using message types (see above) instead
     'sendPhoto': (event) =>
       bot.sendPhoto(event.id, event.photo, event.options),
