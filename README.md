@@ -36,7 +36,9 @@ networks.on('EVENTNAME', (event, reply) => {
 })
 ```
 
-The following events are available: `text`, `audio`, `document`, `photo`, `sticker`, `video`, `voice`, `contact`, `location`, `new_chat_participant`, `left_chat_participant`, `new_chat_title`, `new_chat_photo`, `delete_chat_photo`, `group_chat_created`
+The following events are available: `text`, `audio`, `document`, `photo`, `sticker`, `video`, `voice`, `contact`, `location`, `new_chat_participant`, `left_chat_participant`, `new_chat_title`, `new_chat_photo`, `delete_chat_photo`, `group_chat_created`, [`callback_query`](https://core.telegram.org/bots/api#callbackquery), [`inline_query`](https://core.telegram.org/bots/api#inlinequery), [`chosen_inline_result`](https://core.telegram.org/bots/api#choseninlineresult), `edited_message`, `edited_message_text`, `edited_message_caption`
+
+If you want to use inline queries, make sure to [enable inline mode](https://core.telegram.org/bots/api#inline-mode).
 
 For some example bots, check out the [coffea-bots organisation](https://github.com/coffea-bots)
 for existing bots, or the [coffea-starter repo](https://github.com/coffea-bots/coffea-starter),
@@ -55,7 +57,8 @@ networks.send({
 ```
 
 to access the [telegram api](https://github.com/yagop/node-telegram-bot-api#api-reference).
-All arguments have the same names, except the ids have all been simplified to `id` instead of `chatId`, `inlineQueryId`, etc.
+All arguments have the same names, except `chatId` has been changed to `chat`
+to be consistent with other coffea protocols and allow `reply` to work.
 
 Here is an example:
 

@@ -85,8 +85,12 @@ export default function events (bot, dispatch) {
   bot.on('new_chat_photo', forward('new_chat_photo'))
   bot.on('delete_chat_photo', forward('delete_chat_photo'))
   bot.on('group_chat_created', forward('group_chat_created'))
+  bot.on('callback_query', forward('callback_query'))
   bot.on('inline_query', forward('inline_query'))
   bot.on('chosen_inline_result', forward('chosen_inline_result'))
+  bot.on('edited_message', forward('edited_message'))
+  bot.on('edited_message_text', forward('edited_message_text'))
+  bot.on('edited_message_caption', forward('edited_message_caption'))
 
   bot.on('error', (err) => dispatch(error({ err })))
 }

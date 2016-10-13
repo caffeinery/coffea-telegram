@@ -26,48 +26,74 @@ export default function makeCommands (bot) {
       bot.sendVideo(event.chat, extractFileId(event.data), event.options),
     'document': (event) =>
       bot.sendDocument(event.chat, extractFileId(event.data), event.options),
+    'action': (event) =>
+      bot.sendChatAction(event.chat, event.action),
+    // TODO: add more types and encourage using message types instead
 
     // commands
+    'stopPolling': (event) =>
+      bot.stopPolling(),
     'getMe': (event) =>
       bot.getMe(),
     'setWebHook': (event) =>
       bot.setWebHook(event.url, event.cert),
     'getUpdates': (event) =>
-      bot.getUpdates(event.chat, event.results, event.options),
+      bot.getUpdates(event.timeout, event.limit, event.offset),
     'answerInlineQuery': (event) =>
-      bot.answerInlineQuery(event.chat, event.results, event.options),
+      bot.answerInlineQuery(event.inlineQueryId, event.results, event.options),
     'forwardMessage': (event) =>
       bot.forwardMessage(event.chat, event.fromChatId, event.messageId),
-    // TODO: remove send* commands and encourage using message types (see above) instead
     'sendPhoto': (event) =>
-      bot.sendPhoto(event.id, event.photo, event.options),
+      bot.sendPhoto(event.chat, event.photo, event.options),
     'sendAudio': (event) =>
-      bot.sendAudio(event.id, event.audio, event.options),
+      bot.sendAudio(event.chat, event.audio, event.options),
     'sendDocument': (event) =>
-      bot.sendDocument(event.id, event.document, event.options),
+      bot.sendDocument(event.chat, event.document, event.options),
     'sendSticker': (event) =>
-      bot.sendSticker(event.id, event.sticker, event.options),
+      bot.sendSticker(event.chat, event.sticker, event.options),
     'sendVideo': (event) =>
-      bot.sendVideo(event.id, event.video, event.options),
+      bot.sendVideo(event.chat, event.video, event.options),
     'sendVoice': (event) =>
-      bot.sendVoice(event.id, event.voice, event.options),
+      bot.sendVoice(event.chat, event.voice, event.options),
     'sendChatAction': (event) =>
-      bot.sendChatAction(event.id, event.action),
-    'getUserProfilePhotos': (event) =>
-      bot.getUserProfilePhotos(event.id, event.offset, event.limit),
-    'sendLocation': (event) =>
-      bot.sendLocation(event.id, event.latitude, event.longitude, event.options),
-    'getFile': (event) =>
-      bot.getFile(event.id),
-    'getFileLink': (event) =>
-      bot.getFileLink(event.id),
-    'downloadFile': (event) =>
-      bot.downloadFile(event.id, event.downloadDir),
+      bot.sendChatAction(event.chat, event.action),
+    'kickChatMember': (event) =>
+      bot.kickChatMember(event.chat, event.userId),
+    'unbanChatMember': (event) =>
+      bot.unbanChatMember(event.chat, event.userId),
+    'answerCallbackQuery': (event) =>
+      bot.answerCallbackQuery(event.callbackQueryId, event.text, event.showAlert, event.options),
     'editMessageText': (event) =>
-      bot.editMessageText(event.text, { message_id: event.id, chat_id: event.chat, ...event.options }),
+      bot.editMessageText(event.text, { chat_id: event.chat, ...event.options }),
     'editMessageCaption': (event) =>
-      bot.editMessageCaption(event.caption, { message_id: event.id, chat_id: event.chat, ...event.options }),
+      bot.editMessageCaption(event.caption, { chat_id: event.chat, ...event.options }),
     'editMessageReplyMarkup': (event) =>
-      bot.editMessageReplyMarkup(event.reply_markup, { message_id: event.id, chat_id: event.chat, ...event.options })
+      bot.editMessageReplyMarkup(event.replyMarkup, { chat_id: event.chat, ...event.options }),
+    'getUserProfilePhotos': (event) =>
+      bot.getUserProfilePhotos(event.userId, event.offset, event.limit),
+    'sendLocation': (event) =>
+      bot.sendLocation(event.chat, event.latitude, event.longitude, event.options),
+    'sendVenue': (event) =>
+      bot.sendVenue(event.chat, event.latitude, event.longitude, event.title, event.address, event.options),
+    'getFile': (event) =>
+      bot.getFile(event.fileId),
+    'getFileLink': (event) =>
+      bot.getFileLink(event.fileId),
+    'downloadFile': (event) =>
+      bot.downloadFile(event.fileId, event.downloadDir),
+    'getChat': (event) =>
+      bot.getChat(event.chat),
+    'getChatAdministrators': (event) =>
+      bot.getChatAdministrators(event.chat),
+    'getChatMembersCount': (event) =>
+      bot.getChatMembersCount(event.chat),
+    'getChatMember': (event) =>
+      bot.getChatMember(event.chat, event.userId),
+    'leaveChat': (event) =>
+      bot.leaveChat(event.chat),
+    'sendGame': (event) =>
+      bot.sendGame(event.chat, event.gameShortName, event.options),
+    'setGameScore': (event) =>
+      bot.setGameScore(event.userId, event.score, event.options)
   }
 }
