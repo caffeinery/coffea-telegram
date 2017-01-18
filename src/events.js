@@ -7,7 +7,7 @@ const isPrivate = (evt) =>
   evt.chat && evt.chat.id === evt.from.id
 
 const getChat = (evt) =>
-  isPrivate(evt) ? evt.from.id : evt.chat.id
+  isPrivate(evt) ? evt.from && evt.from.id : evt.chat && evt.chat.id
 
 const getUser = (evt) =>
   evt.from && evt.from.id
