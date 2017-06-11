@@ -91,6 +91,11 @@ export default function events (bot, dispatch) {
   bot.on('edited_message', forward('edited_message'))
   bot.on('edited_message_text', forward('edited_message_text'))
   bot.on('edited_message_caption', forward('edited_message_caption'))
+  bot.on('channel_post', forward('channel_post'))
+  bot.on('edited_channel_post_text', forward('edited_channel_post_text'))
+  bot.on('edited_channel_post_caption', forward('edited_channel_post_caption'))
+  bot.on('shipping_query', forward('shipping_query'))
+  bot.on('pre_checkout_query', forward('pre_checkout_query'))
 
   bot.on('error', (err) => dispatch(error({ err })))
 }

@@ -94,6 +94,24 @@ export default function makeCommands (bot) {
     'sendGame': (event) =>
       bot.sendGame(event.chat, event.gameShortName, event.options),
     'setGameScore': (event) =>
-      bot.setGameScore(event.userId, event.score, event.options)
+      bot.setGameScore(event.userId, event.score, event.options),
+    'deleteMessage': (event) =>
+      bot.deleteMessage(event.chat, event.messageId, event.options),
+    'sendInvoice': (event) =>
+      bot.sendInvoice(
+        event.chat,
+        event.title,
+        event.description,
+        event.payload,
+        event.providerToken,
+        event.startParameter,
+        event.currency,
+        event.prices,
+        event.options
+      ),
+    'answerShippingQuery': (event) =>
+      bot.answerShippingQuery(event.shippingQueryId, event.ok, event.options),
+    'answerPreCheckoutQuery': (event) =>
+      bot.answerPreCheckoutQuery(event.preCheckoutQueryId, event.ok, event.options)
   }
 }
