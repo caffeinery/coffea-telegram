@@ -55,7 +55,7 @@ export default function events (bot, dispatch) {
     log('message event received: %o', evt)
     if (evt.text.charAt(0) === '/') { // example: /np@nowplayingbot username
       log(' |-> command detected')
-      let args = evt.text.substring(1).split(' ') // [ 'np@nowplayingbot', 'username' ]
+      let args = evt.text.substring(1).trim().split(/\s+/) // [ 'np@nowplayingbot', 'username' ]
       let cmd = args.shift().split('@') // [ 'np', 'nowplayingbot' ]
       // args is now [ 'username' ]
       if (validCommand(me, cmd)) {
