@@ -63,9 +63,9 @@ to be consistent with other coffea protocols and allow `reply` to work.
 Here is an example:
 
 ```js
-networks.send({
+Promise.all(networks.send({
   type: 'getMe'
-}).then(
+})).then(
   me => console.log(me)
 )
 ```
