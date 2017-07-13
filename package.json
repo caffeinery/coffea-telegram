@@ -1,6 +1,6 @@
 {
   "name": "coffea-telegram",
-  "version": "1.0.0-beta9-8",
+  "version": "1.0.0-beta9-9",
   "main": "lib/index.js",
   "devDependencies": {
     "babel-cli": "^6.9.0",
