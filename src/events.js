@@ -4,7 +4,7 @@ const { log } = dude('coffea-telegram:events')
 import { connection, message, command, error } from 'coffea'
 
 const isPrivate = (evt) =>
-  evt.chat && evt.chat.id === evt.from.id
+  evt.chat && evt.chat.type === 'private'
 
 const getChat = (evt) =>
   isPrivate(evt) ? evt.from && evt.from.id : evt.chat && evt.chat.id
