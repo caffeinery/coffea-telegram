@@ -28,6 +28,8 @@ export default function makeCommands (bot) {
       bot.sendDocument(event.chat, extractFileId(event.data), event.options),
     'action': (event) =>
       bot.sendChatAction(event.chat, event.action),
+    'video_note': (event) =>
+      bot.sendVideoNote(event.chat, extractFileId(event.data), event.options),
     // TODO: add more types and encourage using message types instead
 
     // commands

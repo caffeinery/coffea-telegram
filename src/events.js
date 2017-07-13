@@ -76,6 +76,7 @@ export default function events (bot, dispatch) {
   bot.on('photo', forward('photo'))
   bot.on('sticker', forward('sticker'))
   bot.on('video', forward('video'))
+  bot.on('video_note', forward('video_note'))
   bot.on('voice', forward('voice'))
   bot.on('contact', forward('contact'))
   bot.on('location', forward('location'))
