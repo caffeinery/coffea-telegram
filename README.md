@@ -56,7 +56,7 @@ networks.send({
 })
 ```
 
-to access the [telegram api](https://github.com/yagop/node-telegram-bot-api#api-reference).
+to access the [telegram api](https://github.com/yagop/node-telegram-bot-api/blob/release/doc/api.md).
 All arguments have the same names, except `chatId` has been changed to `chat`
 to be consistent with other coffea protocols and allow `reply` to work.
 
