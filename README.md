@@ -36,7 +36,7 @@ networks.on('EVENTNAME', (event, reply) => {
 })
 ```
 
-The following events are available: `text`, `audio`, `document`, `photo`, `sticker`, `video`, `voice`, `contact`, `location`, `new_chat_members`, `left_chat_member`, `new_chat_title`, `new_chat_photo`, `delete_chat_photo`, `group_chat_created`, [`callback_query`](https://core.telegram.org/bots/api#callbackquery), [`inline_query`](https://core.telegram.org/bots/api#inlinequery), [`chosen_inline_result`](https://core.telegram.org/bots/api#choseninlineresult), `edited_message`, `edited_message_text`, `edited_message_caption`
+The following events are available: `text`, `audio`, `document`, `photo`, `sticker`, `video`, `video_note`, `voice`, `contact`, `location`, `new_chat_members`, `left_chat_member`, `new_chat_title`, `new_chat_photo`, `delete_chat_photo`, `group_chat_created`, [`callback_query`](https://core.telegram.org/bots/api#callbackquery), [`inline_query`](https://core.telegram.org/bots/api#inlinequery), [`chosen_inline_result`](https://core.telegram.org/bots/api#choseninlineresult), `edited_message`, `edited_message_text`, `edited_message_caption`, `channel_post`, `edited_channel_post_text`, `edited_channel_post_caption`, `shipping_query`, `pre_checkout_query`, `error`
 
 If you want to use inline queries, make sure to [enable inline mode](https://core.telegram.org/bots/api#inline-mode).
 
