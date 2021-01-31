@@ -53,21 +53,52 @@ export default function events (bot, dispatch) {
 
   bot.on('text', (evt) => {
     log('message event received: %o', evt)
-    if (evt.text.charAt(0) === '/') { // example: /np@nowplayingbot username
-      log(' |-> command detected')
-      let args = evt.text.substring(1).trim().split(/\s+/) // [ 'np@nowplayingbot', 'username' ]
-      let cmd = args.shift().split('@') // [ 'np', 'nowplayingbot' ]
-      // args is now [ 'username' ]
-      if (validCommand(me, cmd)) {
-        log(' `-> valid command "%s" with args: %o', cmd[0], args)
-        return dispatch(command({
-          chat: getChat(evt), // chat
-          user: getUser(evt), // user
-          cmd: cmd[0], // cmd
-          args, // args
-          raw: evt // rest of the options
-        }))
-      } else log(' !-> wrong recipient "%s", expected "%s"', cmd[1], me.username)
+
+    /*
+     * Check if we're dealing with a command, and emit a `command` event if so.
+     *
+     * The entities are parsed to ensure that formatted text beginning with
+     * a slash isn't erroneously interpreted as a command.
+     *
+     * Examples of valid commands:
+     *
+     * /np username
+     * /np@nowplayingbot username
+     */
+
+    let isCommand = false
+    let cmdEntity
+
+    if (evt.entities) {
+      for (const entity of evt.entities) {
+        if (entity.type === 'bot_command' && entity.offset === 0) {
+          isCommand = true
+          cmdEntity = entity
+          break
+        }
+      }
+    }
+
+    if (!isCommand) return
+
+    log(' |-> command detected')
+
+    let cmd = evt.text.slice(1, cmdEntity.length).split('@')
+
+    // .filter(Boolean) is used to filter out empty string
+    let args = evt.text.slice(cmdEntity.length + 1).split(/\s+/).filter(Boolean)
+
+    if (validCommand(me, cmd)) {
+      log(' `-> valid command "%s" with args: %o', cmd[0], args)
+      return dispatch(command({
+        chat: getChat(evt), // chat
+        user: getUser(evt), // user
+        cmd: cmd[0], // cmd
+        args, // args
+        raw: evt // rest of the options
+      }))
+    } else {
+      log(' !-> wrong recipient "%s", expected "%s"', cmd[1], me.username)
     }
   })
 
