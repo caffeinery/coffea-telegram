@@ -33,18 +33,33 @@ export default function makeCommands (bot) {
     // TODO: add more types and encourage using message types instead
 
     // commands
+    'startPolling': (event) =>
+      bot.startPolling(event.options),
     'stopPolling': (event) =>
       bot.stopPolling(),
+    // TODO: isPolling
+    'openWebHook': (event) =>
+      bot.openWebHook(),
+    'closeWebHook': (event) =>
+      bot.closeWebHook(),
+    // TODO: hasOpenWebHook
     'getMe': (event) =>
       bot.getMe(),
     'setWebHook': (event) =>
-      bot.setWebHook(event.url, event.cert),
+      bot.setWebHook(event.url, event.options),
+    'deleteWebHook': (event) =>
+      bot.deleteWebHook(),
+    'getWebHookInfo': (event) =>
+      bot.getWebHookInfo(),
     'getUpdates': (event) =>
-      bot.getUpdates(event.timeout, event.limit, event.offset),
+      bot.getUpdates(event.options),
+    // TODO: processUpdate
+    'sendMessage': (event) =>
+      bot.sendMessage(event.chat, event.text, event.options),
     'answerInlineQuery': (event) =>
       bot.answerInlineQuery(event.inlineQueryId, event.results, event.options),
     'forwardMessage': (event) =>
-      bot.forwardMessage(event.chat, event.fromChatId, event.messageId),
+      bot.forwardMessage(event.chat, event.fromChatId, event.messageId, event.options),
     'sendPhoto': (event) =>
       bot.sendPhoto(event.chat, event.photo, event.options),
     'sendAudio': (event) =>
@@ -63,8 +78,26 @@ export default function makeCommands (bot) {
       bot.kickChatMember(event.chat, event.userId),
     'unbanChatMember': (event) =>
       bot.unbanChatMember(event.chat, event.userId),
+    'restrictChatMember': (event) =>
+      bot.restrictChatMember(event.chat, event.userId, event.options),
+    'promoteChatMember': (event) =>
+      bot.restrictChatMember(event.chat, event.userId, event.options),
+    'exportChatInviteLink': (event) =>
+      bot.exportChatInviteLink(event.chat),
+    'setChatPhoto': (event) =>
+      bot.setChatPhoto(event.chat, event.photo),
+    'deleteChatPhoto': (event) =>
+      bot.deleteChatPhoto(event.chat),
+    'setChatTitle': (event) =>
+      bot.setChatTitle(event.chat, event.title),
+    'setChatDescription': (event) =>
+      bot.setChatDescription(event.chat, event.description),
+    'pinChatMessage': (event) =>
+      bot.pinChatMessage(event.chat, event.messageId),
+    'unpinChatMessage': (event) =>
+      bot.unpinChatMessage(event.chat),
     'answerCallbackQuery': (event) =>
-      bot.answerCallbackQuery(event.callbackQueryId, event.text, event.showAlert, event.options),
+      bot.answerCallbackQuery(event.options),
     'editMessageText': (event) =>
       bot.editMessageText(event.text, { chat_id: event.chat, ...event.options }),
     'editMessageCaption': (event) =>
@@ -72,11 +105,13 @@ export default function makeCommands (bot) {
     'editMessageReplyMarkup': (event) =>
       bot.editMessageReplyMarkup(event.replyMarkup, { chat_id: event.chat, ...event.options }),
     'getUserProfilePhotos': (event) =>
-      bot.getUserProfilePhotos(event.userId, event.offset, event.limit),
+      bot.getUserProfilePhotos(event.userId, event.options),
     'sendLocation': (event) =>
       bot.sendLocation(event.chat, event.latitude, event.longitude, event.options),
     'sendVenue': (event) =>
       bot.sendVenue(event.chat, event.latitude, event.longitude, event.title, event.address, event.options),
+    'sendContact': (event) =>
+      bot.sendContact(event.chat, event.phoneNumber, event.firstName, event.options),
     'getFile': (event) =>
       bot.getFile(event.fileId),
     'getFileLink': (event) =>
@@ -97,6 +132,8 @@ export default function makeCommands (bot) {
       bot.sendGame(event.chat, event.gameShortName, event.options),
     'setGameScore': (event) =>
       bot.setGameScore(event.userId, event.score, event.options),
+    'getGameHighScores': (event) =>
+      bot.getGameHighScores(event.userId, event.options),
     'deleteMessage': (event) =>
       bot.deleteMessage(event.chat, event.messageId, event.options),
     'sendInvoice': (event) =>

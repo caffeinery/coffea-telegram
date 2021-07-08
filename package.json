@@ -16,7 +16,7 @@
   "dependencies": {
     "coffea": "1.0.0-beta18",
     "debug-dude": "^1.0.3",
-    "node-telegram-bot-api": "github:yagop/node-telegram-bot-api"
+    "node-telegram-bot-api": "^0.29.0"
   },
   "scripts": {
     "lint": "./node_modules/.bin/eslint src test",
